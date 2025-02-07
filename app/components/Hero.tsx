@@ -1,19 +1,24 @@
-import { Github, Linkedin, Mail } from "lucide-react"
-import Link from "next/link"
+import { Github, Linkedin, Mail } from "lucide-react";
+import Link from "next/link";
 
 export default function Hero() {
   return (
-    <section id="about" className="bg-gradient-to-b from-gray-900 to-gray-800 text-white py-20">
+    <section
+      id="about"
+      className="bg-gradient-to-br from-blue-200 to-blue-50 text-white py-20"
+    >
       <div className="container mx-auto px-6 text-center">
         <div className="mb-8">
           <img
-            src="https://sjc.microlink.io/QU6nHktSXGghQY_Y-v8pmKq_2I3f7-nLZLfu6PdicGkJT4ciuG58P-BGAacbiw1S2XJW-VQIICJFkglmjrGE0Q.jpeg"
+            src="Profile.jpg"
             alt="Profile"
             className="w-32 h-32 rounded-full mx-auto mb-6 object-cover border-4 border-white"
           />
         </div>
-        <h1 className="text-5xl font-bold mb-4">Sai Nirmit</h1>
-        <p className="text-xl mb-8 text-gray-300">iOS Developer | Full Stack Developer | Product Manager</p>
+        <h1 className="text-5xl font-bold text-black mb-4">Sai Nirmit</h1>
+        <p className="text-xl mb-8 text-gray-800">
+          iOS Developer | Full Stack Developer | Product Manager
+        </p>
         <div className="flex justify-center gap-4 mb-8">
           <Link
             href="https://github.com/Sainirmit"
@@ -49,6 +54,5 @@ export default function Hero() {
         </a>
       </div>
     </section>
-  )
+  );
 }
-

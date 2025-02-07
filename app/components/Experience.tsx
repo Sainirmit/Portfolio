@@ -59,59 +59,41 @@ export default function Experience() {
         </h2>
         <div className="space-y-12 max-w-4xl mx-auto">
           {experiences.map((exp, index) => (
-            <div key={index} className="group">
-              <div className="relative preserve-3d duration-500 group-hover:rotate-y-180">
-                {/* Back of card - Moved to render first so it sets the height */}
-                <div className="backface-hidden rotate-y-180">
-                  <div className="bg-gradient-to-br from-blue-300 to-blue-100 p-6 rounded-xl shadow-md">
-                    <h4 className="text-lg font-semibold mb-4 text-gray-800">
-                      Key Responsibilities:
-                    </h4>
-                    <ul className="list-disc list-inside space-y-2 text-gray-700">
-                      {exp.responsibilities.map((resp, idx) => (
-                        <li key={idx} className="ml-4">
-                          {resp}
-                        </li>
-                      ))}
-                    </ul>
+            <div
+              key={index}
+              className="bg-gradient-to-br from-blue-200 to-blue-50 p-6 rounded-xl shadow-md"
+            >
+              <h3 className="text-xl font-semibold text-gray-800">
+                {exp.title}
+              </h3>
+              {exp.appStoreLink && (
+                <Link
+                  href={exp.appStoreLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xl font-semibold text-gray-900 mr-2"
+                >
+                  <div className="flex items-center gap-2 text-blue-600 text-underline mt-1 text-sm">
+                    <Building2 className="w-4 h-4" />
+                    <span>{exp.company}</span>
                   </div>
-                </div>
-
-                {/* Front of card */}
-                <div className="absolute inset-0 backface-hidden">
-                  <div className="bg-gradient-to-br from-blue-200 to-blue-50 p-6 rounded-xl shadow-md h-full overflow-hidden">
-                    <div className="overflow-y-auto max-h-full">
-                      <div className="flex flex-col md:flex-row md:items-start justify-between mb-4">
-                        <div>
-                          <h3 className="text-xl font-semibold text-gray-800">
-                            {exp.title}
-                          </h3>
-                          {exp.appStoreLink && (
-                            <Link
-                              href={exp.appStoreLink}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-xl font-semibold text-gray-900 mr-2"
-                            >
-                              <div className="flex items-center gap-2 text-blue-600 text-underline mt-1 text-sm">
-                                <Building2 className="w-4 h-4" />
-                                <span>{exp.company}</span>
-                              </div>
-                            </Link>
-                          )}
-                        </div>
-                        <div className="flex items-center gap-2 text-gray-600 mt-2 md:mt-0">
-                          <Calendar className="w-4 h-4" />
-                          <span>{exp.period}</span>
-                        </div>
-                      </div>
-                      {exp.description && (
-                        <p className="text-gray-700 mb-4">{exp.description}</p>
-                      )}
-                    </div>
-                  </div>
-                </div>
+                </Link>
+              )}
+              <div className="flex items-center gap-2 text-gray-600 mt-2">
+                <Calendar className="w-4 h-4" />
+                <span>{exp.period}</span>
               </div>
+              <p className="text-gray-700 mb-4">{exp.description}</p>
+              <h4 className="text-lg font-semibold mb-4 text-gray-800">
+                Key Responsibilities:
+              </h4>
+              <ul className="list-disc list-inside space-y-2 text-gray-700">
+                {exp.responsibilities.map((resp, idx) => (
+                  <li key={idx} className="ml-4">
+                    {resp}
+                  </li>
+                ))}
+              </ul>
             </div>
           ))}
         </div>
