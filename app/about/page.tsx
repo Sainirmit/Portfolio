@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
+import Link from "next/link";
 
 export default function About() {
   const skills = [
@@ -37,6 +38,14 @@ export default function About() {
     <div className="min-h-screen bg-gradient-to-br from-blue-200 to-blue-50">
       {/* Header */}
       <header className="flex items-center justify-between p-6">
+        <div className="flex items-center gap-2">
+          <Link
+            href="/"
+            className="bg-black text-white rounded-lg px-4 py-2 hover:bg-gray-800 transition-colors"
+          >
+            Go back to Home
+          </Link>
+        </div>
         <div className="flex items-center gap-2"></div>
       </header>
 
