@@ -17,7 +17,8 @@ export default function Hero() {
         </div>
         <h1 className="text-5xl font-bold text-black mb-4">Sai Nirmit</h1>
         <p className="text-xl mb-8 text-gray-800">
-          iOS Developer | Full Stack Developer | Product Manager
+          iOS Developer | Full Stack Developer | Product Manager | AI/ML
+          Enthusiast
         </p>
         <div className="flex justify-center gap-4 mb-8">
           <Link
