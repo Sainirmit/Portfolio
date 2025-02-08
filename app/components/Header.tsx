@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Header() {
   return (
-    <header className="bg-gradient-to-r from-blue-900 to-purple-700 text-white shadow-lg">
+    <header className="bg-gradient-to-r from-blue-900 to-blue-700 text-white shadow-lg fixed w-full">
       <div className="container mx-auto flex justify-between items-center p-4">
         <h1 className="text-2xl font-bold">Sai Nirmit</h1>
         <nav>
