@@ -7,43 +7,50 @@ export default function Experience() {
       title: "Founding Team Member",
       company: "Wynngrid",
       appStoreLink: "https://wynngrid.com/",
-      period: "August 2024 - December 2024",
-      description:
-        "Wynngrid aims to be a single point of contact for all homeowner needs by connecting top-notch interior designers and architects with homeowners who align with their design language and vision. Our platform simplifies the home design journey, ensuring a seamless experience from concept to execution.",
+      period: "December 2024 - Present",
+      description: "",
       responsibilities: [
-        "Product Management: Leading tech product development and strategy",
-        "Technology Oversight: Working with developers on scalable solutions",
-        "Business Development: Conducting customer interviews and market research",
-        "Project Execution: Managing sprints using Agile methodologies",
-        "Stakeholder Coordination: Driving innovation and execution",
+        "Generated $20,000+ in revenue by building Wynngrid's digital presence, leading to its first major interior design deal.",
+        "Increased sales conversion by 20% through data-driven customer acquisition and product optimization.",
+        "Improved operational efficiency by 30% by implementing Agile workflows and automation.",
+        "Engaged with 500+ homeowners, architects, and interior designers, refining platform offerings and expanding market reach.",
       ],
     },
     {
       title: "Founding Team Member",
       company: "Elevvia",
       appStoreLink: "https://www.elevvia.tech/",
-      period: "August 2024 - December 2024",
-      description:
-        "Elevvia Tech was a collaborative venture founded by me and three colleagues from my university, driven by a shared vision to empower SMBs and individuals with cutting-edge digital solutions. Recognizing the challenges faced by businesses in adapting to an increasingly digital landscape, we set out to bridge the gap between technology and business needs. Our mission was to provide scalable, cost-effective, and user-centric solutions—ranging from web development and AI-driven automation to strategic consulting—helping businesses streamline operations, enhance their online presence, and drive growth.",
+      period: "August 2024 - Present",
+      description: "",
       responsibilities: [
-        "Web Development: Designed and developed responsive, high-performance websites and web applications to enhance online presence.",
-        "AI Solutions: Implemented AI-driven automation, data analysis, and optimization tools to streamline business operations.",
-        "Lead Generation: Identified and pursued potential clients, growing our client base through targeted outreach and strategic networking.",
-        "Project Management: Ensured seamless execution of projects by defining product requirements in collaboration with stakeholders, managing sprints and tracking progress using Jira and Linear, conducting sprint reviews, and proactively resolving blockers, and coordinating team efforts and prioritizing tasks via Slack.",
+        "Secured $5,000+ in revenue in 3 months by developing and selling AI-driven digital solutions to SMBs.",
+        "Boosted client operational efficiency by 40% through AI-based business automation.",
+        "Accelerated project delivery by 25% via optimized Agile workflows and sprint execution.",
+        "Built and deployed 5+ scalable web applications, driving digital transformation for small and medium businesses.",
+      ],
+    },
+    {
+      title: "iOS Developer",
+      company: "StitchIt App Team",
+      appStoreLink: "#",
+      period: "June 2024 - August 2024",
+      description: "",
+      responsibilities: [
+        "Increased app engagement by 35% through UI enhancements and improved user flows.",
+        "Reduced frontend latency by 20%, optimizing platform responsiveness.",
+        "Ensured on-time feature rollouts by streamlining Agile sprint execution.",
       ],
     },
     {
       title: "iOS Developer Intern",
-      company: "Infosys",
+      company: "Infosys, Mysore DC",
       appStoreLink:
         "https://drive.google.com/file/d/1-ICV6Aeg4JoHeVfGkf1t2SNipopOTn-N/view?usp=sharing",
       period: "May 2024 - June 2024",
-      description:
-        "At Infosys Mysore DC, I worked as an iOS Developer, focusing on frontend development, UI design, and implementing app architecture. During my time there, I honed my skills in Swift, SwiftUI, and MVVM architecture while collaborating with a team to build scalable and user-friendly applications.",
+      description: "",
       responsibilities: [
-        "Developed a Library Management System with three terminals for Librarian, Admin, and Member roles, optimizing data management and user interaction. ",
-        "Operated within an agile team of 9, leveraging Jira for project management",
-        "Adopted MVC architecture for app development.",
+        "Developed a Library Management System, enhancing efficiency for three user roles.",
+        "Improved team productivity by 15% through Agile sprint optimizations.",
       ],
     },
   ];
@@ -51,11 +58,11 @@ export default function Experience() {
   return (
     <section
       id="experience"
-      className="py-20 bg-gradient-to-br from-blue-100 to-white"
+      className="py-20 bg-gradient-to-br from-blue-100 to-white scroll-mt-24"
     >
       <div className="container mx-auto px-6">
         <h2 className="text-3xl font-bold mb-12 text-center text-gray-800">
-          Work Experience
+          Professional Experience
         </h2>
         <div className="space-y-12 max-w-4xl mx-auto">
           {experiences.map((exp, index) => (
@@ -66,28 +73,34 @@ export default function Experience() {
               <h3 className="text-xl font-semibold text-gray-800">
                 {exp.title}
               </h3>
-              {exp.appStoreLink && (
+              {exp.appStoreLink && exp.appStoreLink !== "#" && (
                 <Link
                   href={exp.appStoreLink}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-xl font-semibold text-gray-900 mr-2"
+                  aria-label={`Visit ${exp.company} website`}
                 >
                   <div className="flex items-center gap-2 text-blue-600 text-underline mt-1 text-sm">
-                    <Building2 className="w-4 h-4" />
+                    <Building2 className="w-4 h-4" aria-hidden="true" />
                     <span>{exp.company}</span>
                   </div>
                 </Link>
               )}
+              {exp.appStoreLink === "#" && (
+                <div className="flex items-center gap-2 text-blue-600 text-underline mt-1 text-sm">
+                  <Building2 className="w-4 h-4" aria-hidden="true" />
+                  <span>{exp.company}</span>
+                </div>
+              )}
               <div className="flex items-center gap-2 text-gray-600 mt-2">
-                <Calendar className="w-4 h-4" />
+                <Calendar className="w-4 h-4" aria-hidden="true" />
                 <span>{exp.period}</span>
               </div>
-              <p className="text-gray-700 mb-4">{exp.description}</p>
-              <h4 className="text-lg font-semibold mb-4 text-gray-800">
-                Key Responsibilities:
-              </h4>
-              <ul className="list-disc list-inside space-y-2 text-gray-700">
+              {exp.description && (
+                <p className="text-gray-700 mb-4">{exp.description}</p>
+              )}
+              <ul className="list-disc list-inside space-y-2 text-gray-700 mt-4">
                 {exp.responsibilities.map((resp, idx) => (
                   <li key={idx} className="ml-4">
                     {resp}

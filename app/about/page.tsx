@@ -64,7 +64,7 @@ export default function About() {
             />
           </div>
           <div className="space-y-6">
-            <h1 className="text-6xl font-bold">Hi there!</h1>
+            <h1 className="text-6xl font-bold text-blue-950">Hi there!</h1>
             <p className="text-xl text-gray-600 leading-relaxed">
               Driven by curiosity and a relentless pursuit of innovation, I
               thrive on building products that solve real-world problems. Every
@@ -79,7 +79,9 @@ export default function About() {
 
         <div className="grid md:grid-cols-2 gap-12 items-start">
           <div className="space-y-6">
-            <h2 className="text-4xl font-bold">My Journey So Far</h2>
+            <h2 className="text-4xl font-bold text-blue-950">
+              My Journey So Far
+            </h2>
             <p className="text-gray-600 leading-relaxed">
               Always eager to take on new challenges, I have worked with lean
               startups and played a key role in building innovative products.

@@ -1,27 +1,42 @@
-import "./globals.css"
-import { Inter } from "next/font/google"
-import { Analytics } from "@vercel/analytics/react"
-import type React from "react" // Import React
+import "./globals.css";
+import { Inter } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
+import type React from "react";
+import { defaultMetadata } from "./metadata";
+import { ThemeProvider } from "@/components/theme-provider";
 
-const inter = Inter({ subsets: ["latin"] })
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
+});
 
-export const metadata = {
-  title: "Sai Nirmit - iOS & Full Stack Developer",
-  description: "Portfolio of Sai Nirmit - iOS Developer, Full Stack Developer, and Product Manager",
-}
+export const metadata = defaultMetadata;
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className={`scroll-smooth ${inter.variable}`}>
+      <head>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=5.0"
+        />
+      </head>
       <body className={inter.className}>
-        {children}
-        <Analytics />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+          <Analytics />
+        </ThemeProvider>
       </body>
     </html>
-  )
+  );
 }
-
