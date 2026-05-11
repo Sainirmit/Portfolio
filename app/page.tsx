@@ -5,10 +5,12 @@ import Skills from "./components/Skills";
 import Education from "./components/Education";
 import LeadershipImpact from "./components/LeadershipImpact";
 import Footer from "./components/Footer";
+import EtherealBackground from "./components/EtherealBackground";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-gradient-to-br from-blue-200 to-blue-50">
+    <main className="relative min-h-screen overflow-hidden">
+      <EtherealBackground />
       <Header />
       <Hero />
       <LeadershipImpact />

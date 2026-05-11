@@ -1,19 +1,13 @@
 "use client";
 
 import { useState, ChangeEvent, FormEvent } from "react";
-import { Send, CheckCircle } from "lucide-react";
+import { Send, CheckCircle, Mail, Linkedin, Github } from "lucide-react";
+import { motion } from "framer-motion";
+import Link from "next/link";
+import MotionSection from "./MotionSection";
 
-type FormData = {
-  name: string;
-  email: string;
-  message: string;
-};
-
-type FormErrors = {
-  name?: string;
-  email?: string;
-  message?: string;
-};
+type FormData = { name: string; email: string; message: string };
+type FormErrors = Partial<FormData>;
 
 export default function Contact() {
   const [formData, setFormData] = useState<FormData>({
@@ -21,202 +15,157 @@ export default function Contact() {
     email: "",
     message: "",
   });
-  const [formErrors, setFormErrors] = useState<FormErrors>({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [errors, setErrors] = useState<FormErrors>({});
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
-  const validateForm = () => {
-    const errors: FormErrors = {};
-    if (!formData.name.trim()) {
-      errors.name = "Name is required";
-    }
-    if (!formData.email.trim()) {
-      errors.email = "Email is required";
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      errors.email = "Email address is invalid";
-    }
-    if (!formData.message.trim()) {
-      errors.message = "Message is required";
-    }
-    return errors;
+  const validate = () => {
+    const e: FormErrors = {};
+    if (!formData.name.trim()) e.name = "Name is required";
+    if (!formData.email.trim()) e.email = "Email is required";
+    else if (!/\S+@\S+\.\S+/.test(formData.email)) e.email = "Invalid email";
+    if (!formData.message.trim()) e.message = "Message is required";
+    return e;
   };
 
   const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ev: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    setFormData({ ...formData, [ev.target.name]: ev.target.value });
   };
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const errors = validateForm();
-    setFormErrors(errors);
-
-    if (Object.keys(errors).length === 0) {
-      setIsSubmitting(true);
-
-      // Simulate form submission (replace with actual submission logic)
+  const handleSubmit = (ev: FormEvent<HTMLFormElement>) => {
+    ev.preventDefault();
+    const e = validate();
+    setErrors(e);
+    if (Object.keys(e).length === 0) {
+      setSubmitting(true);
       setTimeout(() => {
-        setIsSubmitting(false);
-        setIsSubmitted(true);
+        setSubmitting(false);
+        setSubmitted(true);
         setFormData({ name: "", email: "", message: "" });
-
-        // Reset success message after 5 seconds
-        setTimeout(() => {
-          setIsSubmitted(false);
-        }, 5000);
-      }, 1500);
+        setTimeout(() => setSubmitted(false), 5000);
+      }, 1200);
     }
   };
 
   return (
-    <section
-      id="contact"
-      className="py-20 bg-gradient-to-br from-blue-50 to-white scroll-mt-24"
-    >
+    <MotionSection id="contact" className="relative py-28 scroll-mt-24">
       <div className="container mx-auto px-6">
-        <h2 className="text-3xl font-bold mb-8 text-center text-gray-800">
-          Get in Touch
-        </h2>
+        <div className="mb-16 text-center">
+          <p className="mb-2 text-sm font-medium uppercase tracking-[0.2em] text-pink-400/80">
+            Reach Out
+          </p>
+          <h2 className="text-4xl md:text-5xl font-bold gradient-text">
+            Get in Touch
+          </h2>
+          <p className="mx-auto mt-4 max-w-xl text-white/60">
+            Building something? Hiring? Or just curious. I read every message.
+          </p>
+        </div>
 
-        {isSubmitted ? (
-          <div className="max-w-md mx-auto bg-green-50 p-6 rounded-lg border border-green-200 flex items-center justify-center">
-            <div className="text-center">
-              <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
-              <h3 className="text-xl font-bold text-green-700 mb-2">
-                Message Sent!
-              </h3>
-              <p className="text-green-600">
-                Thank you for reaching out. I'll get back to you soon.
-              </p>
-            </div>
-          </div>
-        ) : (
-          <div className="max-w-md mx-auto">
-            <form className="space-y-4" onSubmit={handleSubmit}>
-              <div>
-                <label
-                  htmlFor="name"
-                  className="block text-gray-700 font-bold mb-2"
-                >
-                  Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  className={`w-full px-3 py-2 border ${
-                    formErrors.name ? "border-red-500" : "border-gray-300"
-                  } rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
-                  aria-describedby={formErrors.name ? "name-error" : undefined}
-                />
-                {formErrors.name && (
-                  <p id="name-error" className="text-red-500 text-sm mt-1">
-                    {formErrors.name}
-                  </p>
-                )}
-              </div>
+        <div className="mx-auto grid max-w-5xl gap-8 md:grid-cols-[1fr_1.2fr]">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="glass rounded-2xl p-7 space-y-5"
+          >
+            <h3 className="text-lg font-semibold text-white">Direct channels</h3>
+            {[
+              { icon: Mail, label: "sainirmit@gmail.com", href: "mailto:sainirmit@gmail.com" },
+              { icon: Linkedin, label: "linkedin.com/in/sainirmit", href: "https://www.linkedin.com/in/sainirmit" },
+              { icon: Github, label: "github.com/Sainirmit", href: "https://github.com/Sainirmit" },
+            ].map((c) => (
+              <Link
+                key={c.label}
+                href={c.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-3 rounded-xl border border-white/5 bg-white/[0.02] px-4 py-3 transition hover:border-violet-400/40 hover:bg-violet-500/10"
+              >
+                <div className="rounded-lg bg-gradient-to-br from-violet-500/30 to-cyan-500/30 p-2 ring-1 ring-white/10">
+                  <c.icon className="w-4 h-4 text-violet-200" />
+                </div>
+                <span className="text-sm text-white/85">{c.label}</span>
+              </Link>
+            ))}
+          </motion.div>
 
+          {submitted ? (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="glass rounded-2xl p-10 flex flex-col items-center justify-center text-center"
+            >
+              <CheckCircle className="w-14 h-14 text-emerald-400 mb-4 animate-glow rounded-full" />
+              <h3 className="text-xl font-bold text-white">Message sent</h3>
+              <p className="mt-2 text-white/60">Will get back to you soon.</p>
+            </motion.div>
+          ) : (
+            <motion.form
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+              onSubmit={handleSubmit}
+              className="glass rounded-2xl p-7 space-y-4"
+            >
+              {(["name", "email"] as const).map((field) => (
+                <div key={field}>
+                  <label className="mb-1.5 block text-xs uppercase tracking-wider text-white/60">
+                    {field}
+                  </label>
+                  <input
+                    type={field === "email" ? "email" : "text"}
+                    name={field}
+                    value={formData[field]}
+                    onChange={handleChange}
+                    className={`w-full rounded-xl border bg-white/[0.03] px-4 py-2.5 text-sm text-white outline-none transition focus:bg-white/[0.06] focus:ring-2 focus:ring-violet-500/50 ${
+                      errors[field] ? "border-red-500/50" : "border-white/10"
+                    }`}
+                  />
+                  {errors[field] && (
+                    <p className="mt-1 text-xs text-red-400">{errors[field]}</p>
+                  )}
+                </div>
+              ))}
               <div>
-                <label
-                  htmlFor="email"
-                  className="block text-gray-700 font-bold mb-2"
-                >
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  className={`w-full px-3 py-2 border ${
-                    formErrors.email ? "border-red-500" : "border-gray-300"
-                  } rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
-                  aria-describedby={
-                    formErrors.email ? "email-error" : undefined
-                  }
-                />
-                {formErrors.email && (
-                  <p id="email-error" className="text-red-500 text-sm mt-1">
-                    {formErrors.email}
-                  </p>
-                )}
-              </div>
-
-              <div>
-                <label
-                  htmlFor="message"
-                  className="block text-gray-700 font-bold mb-2"
-                >
+                <label className="mb-1.5 block text-xs uppercase tracking-wider text-white/60">
                   Message
                 </label>
                 <textarea
-                  id="message"
                   name="message"
-                  rows={4}
+                  rows={5}
                   value={formData.message}
                   onChange={handleChange}
-                  className={`w-full px-3 py-2 border ${
-                    formErrors.message ? "border-red-500" : "border-gray-300"
-                  } rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
-                  aria-describedby={
-                    formErrors.message ? "message-error" : undefined
-                  }
-                ></textarea>
-                {formErrors.message && (
-                  <p id="message-error" className="text-red-500 text-sm mt-1">
-                    {formErrors.message}
-                  </p>
+                  className={`w-full rounded-xl border bg-white/[0.03] px-4 py-2.5 text-sm text-white outline-none transition focus:bg-white/[0.06] focus:ring-2 focus:ring-violet-500/50 ${
+                    errors.message ? "border-red-500/50" : "border-white/10"
+                  }`}
+                />
+                {errors.message && (
+                  <p className="mt-1 text-xs text-red-400">{errors.message}</p>
                 )}
               </div>
-
               <button
                 type="submit"
-                disabled={isSubmitting}
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-md transition-colors flex items-center justify-center"
+                disabled={submitting}
+                className="group inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-violet-500 to-indigo-500 px-6 py-3 text-sm font-semibold text-white shadow-[0_8px_30px_rgba(139,92,246,0.4)] transition hover:shadow-[0_12px_40px_rgba(139,92,246,0.6)] disabled:opacity-60"
               >
-                {isSubmitting ? (
-                  <>
-                    <svg
-                      className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                    >
-                      <circle
-                        className="opacity-25"
-                        cx="12"
-                        cy="12"
-                        r="10"
-                        stroke="currentColor"
-                        strokeWidth="4"
-                      ></circle>
-                      <path
-                        className="opacity-75"
-                        fill="currentColor"
-                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                      ></path>
-                    </svg>
-                    Sending...
-                  </>
+                {submitting ? (
+                  "Sending…"
                 ) : (
                   <>
-                    <Send className="w-5 h-5 mr-2" />
-                    Send Message
+                    Send message
+                    <Send className="w-4 h-4 transition group-hover:translate-x-1" />
                   </>
                 )}
               </button>
-            </form>
-          </div>
-        )}
+            </motion.form>
+          )}
+        </div>
       </div>
-    </section>
+    </MotionSection>
   );
 }

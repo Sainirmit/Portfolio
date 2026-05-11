@@ -1,86 +1,91 @@
-export default function Skills() {
-  const skillCategories = [
-    {
-      title: "Programming Languages",
-      skills: ["Swift", "Java", "Python"],
-    },
-    {
-      title: "iOS Development",
-      skills: ["SwiftUI", "UIKit", "XCode", "Firebase", "ARKit"],
-    },
-    {
-      title: "Web Development",
-      skills: [
-        "HTML",
-        "CSS",
-        "React",
-        "Javascript",
-        "NodeJS",
-        "Next.js",
-        "TailwindCSS",
-      ],
-    },
-    {
-      title: "Data Science & ML",
-      skills: ["Machine Learning", "Data Science"],
-    },
-    {
-      title: "Project Management",
-      skills: ["Agile", "JIRA", "SCRUM", "Project Management"],
-    },
-    {
-      title: "Architecture & Design",
-      skills: ["MVVM", "MVC", "UI/UX Design"],
-    },
-    {
-      title: "Version Control & DevOps",
-      skills: ["Git", "GitHub", "Bitbucket", "Docker"],
-    },
-    {
-      title: "Soft Skills",
-      skills: [
-        "Strong Communication",
-        "Team Management",
-        "Adaptability",
-        "Leadership",
-        "Project Planning",
-        "+",
-      ],
-    },
-  ];
+"use client";
 
+import { motion } from "framer-motion";
+import MotionSection, { fadeUp, stagger } from "./MotionSection";
+
+const categories = [
+  {
+    title: "Languages",
+    skills: ["Swift", "TypeScript", "JavaScript", "Python", "Java"],
+  },
+  {
+    title: "Mobile",
+    skills: ["SwiftUI", "UIKit", "React Native", "XCode", "Firebase", "RevenueCat"],
+  },
+  {
+    title: "Web & Backend",
+    skills: ["React", "Next.js", "Node.js", "Express", "Django", "TailwindCSS"],
+  },
+  {
+    title: "AI / ML",
+    skills: [
+      "RAG / LLMs",
+      "LangChain",
+      "OpenAI",
+      "Pinecone",
+      "Qdrant",
+      "Transformers",
+      "PyTorch",
+      "TensorFlow",
+      "Deep Learning",
+    ],
+  },
+  {
+    title: "Infra & Data",
+    skills: ["Docker", "AWS S3", "BullMQ", "Elasticsearch", "ImapFlow", "Git"],
+  },
+  {
+    title: "Product & Process",
+    skills: ["Agile", "SCRUM", "Kanban", "Jira", "Linear", "UI/UX"],
+  },
+];
+
+export default function Skills() {
   return (
-    <section
-      id="skills"
-      className="py-20 bg-gradient-to-br from-blue-100 to-white"
-    >
+    <MotionSection id="skills" className="relative py-28">
       <div className="container mx-auto px-6">
-        <h2 className="text-3xl font-bold mb-12 text-center text-gray-800">
-          Skills
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {skillCategories.map((category, index) => (
-            <div
-              key={index}
-              className="bg-gradient-to-br from-blue-200 to-blue-50 p-6 rounded-xl shadow-md"
+        <div className="mb-16 text-center">
+          <p className="mb-2 text-sm font-medium uppercase tracking-[0.2em] text-cyan-400/80">
+            Toolkit
+          </p>
+          <h2 className="text-4xl md:text-5xl font-bold gradient-text">
+            Skills & Stack
+          </h2>
+        </div>
+
+        <motion.div
+          variants={stagger}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-60px" }}
+          className="mx-auto grid max-w-6xl gap-6 md:grid-cols-2 lg:grid-cols-3"
+        >
+          {categories.map((cat, i) => (
+            <motion.div
+              key={cat.title}
+              variants={fadeUp}
+              custom={i}
+              whileHover={{ y: -4 }}
+              className="group relative glass rounded-2xl p-6 overflow-hidden"
             >
-              <h3 className="text-xl font-semibold mb-4 text-gray-800">
-                {category.title}
+              <div className="absolute -top-12 -right-12 h-32 w-32 rounded-full bg-violet-500/20 blur-2xl transition group-hover:bg-violet-500/40" />
+              <h3 className="relative text-lg font-semibold text-white mb-4">
+                {cat.title}
               </h3>
-              <div className="flex flex-wrap gap-2">
-                {category.skills.map((skill, idx) => (
+              <div className="relative flex flex-wrap gap-2">
+                {cat.skills.map((s) => (
                   <span
-                    key={idx}
-                    className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium"
+                    key={s}
+                    className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-xs text-white/80 transition hover:border-violet-400/50 hover:bg-violet-500/10 hover:text-white"
                   >
-                    {skill}
+                    {s}
                   </span>
                 ))}
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </MotionSection>
   );
 }

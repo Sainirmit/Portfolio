@@ -1,116 +1,176 @@
-import { Calendar, Building2 } from "lucide-react";
+"use client";
+
+import { Calendar, Building2, ExternalLink } from "lucide-react";
 import Link from "next/link";
+import { motion } from "framer-motion";
+import MotionSection, { fadeUp, stagger } from "./MotionSection";
+
+const experiences = [
+  {
+    title: "Full Stack App Developer",
+    company: "myTrainr AI",
+    tagline: "AI fitness coach",
+    link: "#",
+    period: "Mar 2026 – Apr 2026",
+    responsibilities: [
+      "Built AI-powered fitness app on React Native + SwiftUI with Node.js, Firebase, and LLM integration.",
+      "Engineered scalable backend APIs and real-time data flows for workout tracking, progress analytics, and meal tracking.",
+      "Shipped to App Store with focus on speed and scale.",
+      "Integrated RevenueCat for payment processing and subscription management.",
+    ],
+  },
+  {
+    title: "Associate – Backend Engineer",
+    company: "Outbox Labs",
+    tagline: "Zapmail",
+    link: "#",
+    period: "May 2025 – Dec 2025",
+    responsibilities: [
+      "Owned end-to-end bug resolution, feature development, and maintenance across multiple backend services.",
+      "Leveraged Cursor IDE AI-powered workflows with TypeScript to ship features faster.",
+    ],
+  },
+  {
+    title: "AI Developer Intern",
+    company: "NET Solutions",
+    tagline: "",
+    link: "#",
+    period: "Apr 2025 – May 2025",
+    responsibilities: [
+      "Built Django backend systems for enterprise software, improving API performance by 15% through RESTful design.",
+      "Prototyped RAG workflows with LangChain/OpenAI, integrating Pinecone for 20% faster document retrieval.",
+    ],
+  },
+  {
+    title: "Founding Team Member",
+    company: "Elevvia",
+    tagline: "",
+    link: "https://www.elevvia.tech/",
+    period: "Aug 2024 – Dec 2025",
+    responsibilities: [
+      "Drove $5K+ revenue in 3 months deploying AI automation tools (Python/React), boosting client efficiency by 40%.",
+      "Delivered 5+ scalable web apps (Next.js/Node.js), accelerating SMB digital transformation.",
+    ],
+  },
+  {
+    title: "Founding Team Member",
+    company: "Wynngrid",
+    tagline: "",
+    link: "https://wynngrid.com/",
+    period: "Dec 2024 – May 2025",
+    responsibilities: [
+      "Generated $20,000+ in revenue by building Wynngrid's digital presence.",
+      "Automated workflows with Agile/Jira, improving operational efficiency by 30%.",
+      "Engaged 500+ homeowners, architects, and interior designers, refining platform offerings and expanding market reach.",
+    ],
+  },
+  {
+    title: "iOS Developer",
+    company: "StitchIt App",
+    tagline: "",
+    link: "#",
+    period: "Jun 2024 – Aug 2024",
+    responsibilities: [
+      "Boosted app engagement by 35% via SwiftUI UI enhancements, reducing latency by 20%.",
+    ],
+  },
+  {
+    title: "iOS Developer Intern",
+    company: "Infosys",
+    tagline: "Mysore DC",
+    link: "https://drive.google.com/file/d/1-ICV6Aeg4JoHeVfGkf1t2SNipopOTn-N/view?usp=sharing",
+    period: "May 2024 – Jun 2024",
+    responsibilities: [
+      "Shipped Library Management System (Swift/Firebase), improving productivity by 15% across 3 user roles.",
+    ],
+  },
+];
 
 export default function Experience() {
-  const experiences = [
-    {
-      title: "Founding Team Member",
-      company: "Wynngrid",
-      appStoreLink: "https://wynngrid.com/",
-      period: "December 2024 - Present",
-      description: "",
-      responsibilities: [
-        "Generated $20,000+ in revenue by building Wynngrid's digital presence, leading to its first major interior design deal.",
-        "Increased sales conversion by 20% through data-driven customer acquisition and product optimization.",
-        "Improved operational efficiency by 30% by implementing Agile workflows and automation.",
-        "Engaged with 500+ homeowners, architects, and interior designers, refining platform offerings and expanding market reach.",
-      ],
-    },
-    {
-      title: "Founding Team Member",
-      company: "Elevvia",
-      appStoreLink: "https://www.elevvia.tech/",
-      period: "August 2024 - Present",
-      description: "",
-      responsibilities: [
-        "Secured $5,000+ in revenue in 3 months by developing and selling AI-driven digital solutions to SMBs.",
-        "Boosted client operational efficiency by 40% through AI-based business automation.",
-        "Accelerated project delivery by 25% via optimized Agile workflows and sprint execution.",
-        "Built and deployed 5+ scalable web applications, driving digital transformation for small and medium businesses.",
-      ],
-    },
-    {
-      title: "iOS Developer",
-      company: "StitchIt App Team",
-      appStoreLink: "#",
-      period: "June 2024 - August 2024",
-      description: "",
-      responsibilities: [
-        "Increased app engagement by 35% through UI enhancements and improved user flows.",
-        "Reduced frontend latency by 20%, optimizing platform responsiveness.",
-        "Ensured on-time feature rollouts by streamlining Agile sprint execution.",
-      ],
-    },
-    {
-      title: "iOS Developer Intern",
-      company: "Infosys, Mysore DC",
-      appStoreLink:
-        "https://drive.google.com/file/d/1-ICV6Aeg4JoHeVfGkf1t2SNipopOTn-N/view?usp=sharing",
-      period: "May 2024 - June 2024",
-      description: "",
-      responsibilities: [
-        "Developed a Library Management System, enhancing efficiency for three user roles.",
-        "Improved team productivity by 15% through Agile sprint optimizations.",
-      ],
-    },
-  ];
-
   return (
-    <section
+    <MotionSection
       id="experience"
-      className="py-20 bg-gradient-to-br from-blue-100 to-white scroll-mt-24"
+      className="relative py-28 scroll-mt-24"
     >
       <div className="container mx-auto px-6">
-        <h2 className="text-3xl font-bold mb-12 text-center text-gray-800">
-          Professional Experience
-        </h2>
-        <div className="space-y-12 max-w-4xl mx-auto">
-          {experiences.map((exp, index) => (
-            <div
-              key={index}
-              className="bg-gradient-to-br from-blue-200 to-blue-50 p-6 rounded-xl shadow-md"
-            >
-              <h3 className="text-xl font-semibold text-gray-800">
-                {exp.title}
-              </h3>
-              {exp.appStoreLink && exp.appStoreLink !== "#" && (
-                <Link
-                  href={exp.appStoreLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-xl font-semibold text-gray-900 mr-2"
-                  aria-label={`Visit ${exp.company} website`}
-                >
-                  <div className="flex items-center gap-2 text-blue-600 text-underline mt-1 text-sm">
-                    <Building2 className="w-4 h-4" aria-hidden="true" />
-                    <span>{exp.company}</span>
-                  </div>
-                </Link>
-              )}
-              {exp.appStoreLink === "#" && (
-                <div className="flex items-center gap-2 text-blue-600 text-underline mt-1 text-sm">
-                  <Building2 className="w-4 h-4" aria-hidden="true" />
-                  <span>{exp.company}</span>
-                </div>
-              )}
-              <div className="flex items-center gap-2 text-gray-600 mt-2">
-                <Calendar className="w-4 h-4" aria-hidden="true" />
-                <span>{exp.period}</span>
-              </div>
-              {exp.description && (
-                <p className="text-gray-700 mb-4">{exp.description}</p>
-              )}
-              <ul className="list-disc list-inside space-y-2 text-gray-700 mt-4">
-                {exp.responsibilities.map((resp, idx) => (
-                  <li key={idx} className="ml-4">
-                    {resp}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+        <div className="mb-16 text-center">
+          <p className="mb-2 text-sm font-medium uppercase tracking-[0.2em] text-violet-400/80">
+            Journey
+          </p>
+          <h2 className="text-4xl md:text-5xl font-bold gradient-text">
+            Professional Experience
+          </h2>
         </div>
+
+        <motion.div
+          variants={stagger}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-60px" }}
+          className="relative mx-auto max-w-4xl"
+        >
+          <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-violet-500/60 via-indigo-500/30 to-transparent" />
+
+          {experiences.map((exp, i) => (
+            <motion.div
+              key={i}
+              variants={fadeUp}
+              custom={i}
+              className={`relative mb-10 md:w-1/2 ${
+                i % 2 === 0 ? "md:pr-12" : "md:ml-auto md:pl-12"
+              } pl-12 md:pl-0`}
+            >
+              <span className="absolute left-4 md:left-auto md:right-[-7px] top-6 h-3.5 w-3.5 rounded-full bg-gradient-to-br from-violet-400 to-cyan-400 shadow-[0_0_20px_rgba(139,92,246,0.7)] animate-glow"
+                style={i % 2 === 0 ? {} : { right: "auto", left: "-7px" }}
+              />
+
+              <div className="group glass rounded-2xl p-6 transition hover:bg-white/[0.06] hover:-translate-y-1">
+                <h3 className="text-lg md:text-xl font-semibold text-white">
+                  {exp.title}
+                </h3>
+                {exp.link && exp.link !== "#" ? (
+                  <Link
+                    href={exp.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-1 inline-flex items-center gap-2 text-sm text-violet-300 hover:text-violet-200"
+                  >
+                    <Building2 className="w-3.5 h-3.5" />
+                    <span>
+                      {exp.company}
+                      {exp.tagline && ` — ${exp.tagline}`}
+                    </span>
+                    <ExternalLink className="w-3 h-3 opacity-60" />
+                  </Link>
+                ) : (
+                  <div className="mt-1 inline-flex items-center gap-2 text-sm text-violet-300">
+                    <Building2 className="w-3.5 h-3.5" />
+                    <span>
+                      {exp.company}
+                      {exp.tagline && ` — ${exp.tagline}`}
+                    </span>
+                  </div>
+                )}
+                <div className="mt-2 flex items-center gap-2 text-xs text-white/50">
+                  <Calendar className="w-3.5 h-3.5" />
+                  <span>{exp.period}</span>
+                </div>
+                <ul className="mt-4 space-y-2">
+                  {exp.responsibilities.map((r, idx) => (
+                    <li
+                      key={idx}
+                      className="relative pl-5 text-sm text-white/70 leading-relaxed"
+                    >
+                      <span className="absolute left-0 top-2 h-1.5 w-1.5 rounded-full bg-gradient-to-r from-violet-400 to-cyan-400" />
+                      {r}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
-    </section>
+    </MotionSection>
   );
 }
